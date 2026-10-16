@@ -8,7 +8,7 @@ CREATE TABLE restaurantes (
     direccion VARCHAR(255) NOT NULL,
     telefono VARCHAR(255) NOT NULL,
     responsable VARCHAR(255) NOT NULL,
-    abierto BOOLEAN NOT NULL DEFAULT TRUE
+    abierto BOOLEAN
 );
 
 CREATE TABLE mesas (
@@ -39,6 +39,7 @@ CREATE TABLE reservas (
     mesa_id INT NOT NULL,
     cliente_id INT NOT NULL,
     fecha_hora DATETIME NOT NULL,
+    UNIQUE (mesa_id, fecha_hora),
     FOREIGN KEY (mesa_id) REFERENCES mesas(id) ON DELETE CASCADE,
     FOREIGN KEY (cliente_id) REFERENCES clientes(id) ON DELETE CASCADE
 );
