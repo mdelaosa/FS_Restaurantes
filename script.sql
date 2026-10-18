@@ -2,6 +2,7 @@ DROP DATABASE IF EXISTS franquicias;
 CREATE DATABASE franquicias CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE franquicias;
 
+-- TABLAS
 CREATE TABLE restaurantes (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(255) NOT NULL,
@@ -45,7 +46,6 @@ CREATE TABLE reservas (
 );
 
 -- DATOS
-
 INSERT INTO restaurantes (nombre, direccion, telefono, responsable, abierto) VALUES
 ('Restaurante 1', 'Calle Mayor 1', '911111111', 'Responsable 1', 1),
 ('Restaurante 2', 'Calle Menor 2', '922222222', 'Responsable 2', 0),
@@ -57,7 +57,6 @@ INSERT INTO restaurantes (nombre, direccion, telefono, responsable, abierto) VAL
 ('Restaurante 8', 'Plaza Grande 8', '988888888', 'Responsable 8', 1),
 ('Restaurante 9', 'Plaza Ayuntamiento 9', '999999999', 'Responsable 9', 1),
 ('Restaurante 7', 'Calle del Puerto 10', '900000000', 'Responsable 10', 0);
-
 
 INSERT INTO mesas (restaurante_id, numero_mesa, numero_comensales) VALUES
 (1, 1, 1), 
@@ -85,7 +84,6 @@ INSERT INTO mesas (restaurante_id, numero_mesa, numero_comensales) VALUES
 (10, 2, 4),
 (10, 3, 10);
 
-
 INSERT INTO clientes (nombre, telefono, email) VALUES
 ('Cliente 1', '611111111', 'cliente1@email.com'),
 ('Cliente 2', '622222222', 'cliente2@email.com'),
@@ -98,7 +96,6 @@ INSERT INTO clientes (nombre, telefono, email) VALUES
 ('Cliente 9', '699999999', 'cliente9@email.com'),
 ('Cliente 10', '600000000', 'cliente10@email.com');
 
-
 INSERT INTO favoritos (cliente_id, restaurante_id) VALUES
 (1, 1), (1, 2),
 (2, 3), (2, 4),
@@ -110,3 +107,31 @@ INSERT INTO favoritos (cliente_id, restaurante_id) VALUES
 (8, 4), (8, 5),
 (9, 6), (9, 7),
 (10, 8), (10, 10);
+
+INSERT INTO reservas (mesa_id, cliente_id, fecha_hora) VALUES
+(1, 1, '2026-11-20 14:00:00'),
+(2, 2, '2026-11-20 14:30:00'),
+(3, 3, '2026-11-20 21:00:00'),
+(1, 4, '2026-11-21 15:00:00'),
+(4, 5, '2026-11-20 13:30:00'),
+(5, 6, '2026-11-21 21:30:00'),
+(4, 1, '2026-11-22 14:00:00'),
+(6, 7, '2026-11-20 20:30:00'),
+(8, 8, '2026-11-21 14:00:00'),
+(7, 9, '2026-11-22 15:00:00'),
+(9, 10, '2026-11-20 22:00:00'),
+(10, 2, '2026-11-21 13:30:00'),
+(11, 3, '2026-11-20 14:15:00'),
+(12, 4, '2026-11-21 21:00:00'),
+(13, 5, '2026-11-22 14:30:00'),
+(14, 6, '2026-11-20 15:00:00'),
+(15, 7, '2026-11-21 20:45:00'),
+(16, 8, '2026-11-20 13:45:00'),
+(17, 9, '2026-11-22 21:15:00'),
+(18, 10, '2026-11-21 14:00:00'),
+(19, 1, '2026-11-22 22:00:00'),
+(20, 2, '2026-11-20 14:00:00'),
+(21, 3, '2026-11-21 21:30:00'),
+(22, 4, '2026-11-20 21:00:00'),
+(24, 5, '2026-11-20 21:30:00'),
+(24, 5, '2026-11-21 14:30:00');
