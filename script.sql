@@ -43,3 +43,19 @@ CREATE TABLE reservas (
     FOREIGN KEY (mesa_id) REFERENCES mesas(id) ON DELETE CASCADE,
     FOREIGN KEY (cliente_id) REFERENCES clientes(id) ON DELETE CASCADE
 );
+
+-- DATOS
+
+INSERT INTO restaurantes (nombre, direccion, telefono, responsable, abierto) VALUES
+('Restaurante 1', 'Calle Mayor 1', '911111111', 'Responsable 1', 1),
+('Restaurante 2', 'Calle Menor 2', '922222222', 'Responsable 2', 0),
+('Restaurante 3', 'Calle Central 3', '9333333333', 'Responsable 3', 0),
+('Restaurante 4', 'Calle Arriba 4', '944444444', 'Responsable 4', 1),
+('Restaurante 5', 'Calle Abajo 5', '955555555', 'Responsable 5', 1),
+('Restaurante 6', 'Calle Estación 6', '966666666', 'Responsable 6', 1),
+('Restaurante 7', 'Plaza Pequeña 7', '977777777', 'Responsable 7', 1),
+('Restaurante 8', 'Plaza Grande 8', '988888888', 'Responsable 8', 1),
+('Restaurante 9', 'Plaza Ayuntamiento 9', '999999999', 'Responsable 9', 1),
+('Restaurante 7', 'Calle del Puerto 10', '900000000', 'Responsable 10', 0);
+
+
