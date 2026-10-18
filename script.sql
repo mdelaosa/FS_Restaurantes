@@ -56,7 +56,7 @@ INSERT INTO restaurantes (nombre, direccion, telefono, responsable, abierto) VAL
 ('Restaurante 7', 'Plaza Pequeña 7', '977777777', 'Responsable 7', 1),
 ('Restaurante 8', 'Plaza Grande 8', '988888888', 'Responsable 8', 1),
 ('Restaurante 9', 'Plaza Ayuntamiento 9', '999999999', 'Responsable 9', 1),
-('Restaurante 7', 'Calle del Puerto 10', '900000000', 'Responsable 10', 0);
+('Restaurante 10', 'Calle del Puerto 10', '900000000', 'Responsable 10', 0);
 
 INSERT INTO mesas (restaurante_id, numero_mesa, numero_comensales) VALUES
 (1, 1, 1), 
@@ -135,3 +135,40 @@ INSERT INTO reservas (mesa_id, cliente_id, fecha_hora) VALUES
 (22, 4, '2026-11-20 21:00:00'),
 (24, 5, '2026-11-20 21:30:00'),
 (24, 5, '2026-11-21 14:30:00');
+
+
+-- SENTENCIAS
+SELECT 
+    clientes.nombre AS 'NOMBRE',
+    clientes.email AS 'EMAIL',
+    clientes.telefono AS 'TLF',
+    mesas.numero_mesa AS 'MESA',
+    mesas.numero_comensales AS 'COMENSALES',
+    reservas.fecha_hora AS 'FECHA Y HORA'
+FROM reservas
+JOIN clientes ON reservas.cliente_id = clientes.id
+JOIN mesas ON reservas.mesa_id = mesas.id
+WHERE mesas.restaurante_id = 1 
+  AND DATE(reservas.fecha_hora) = '2026-11-20';
+  
+SELECT 
+    restaurantes.nombre AS restaurante_favorito,
+    restaurantes.direccion,
+    restaurantes.telefono
+FROM favoritos
+JOIN restaurantes ON favoritos.restaurante_id = restaurantes.id
+WHERE favoritos.cliente_id = 1 
+  AND restaurantes.abierto = 1;
+  
+UPDATE reservas
+SET fecha_hora = '2026-11-25 21:30:00'
+WHERE reservas.id = 1;
+-- Comprobacion
+SELECT 
+    reservas.id AS 'ID Reserva',
+    clientes.nombre AS 'Cliente',
+    reservas.fecha_hora AS 'Nueva Fecha y Hora'
+FROM reservas
+JOIN clientes ON reservas.cliente_id = clientes.id
+WHERE reservas.id = 1;
+
