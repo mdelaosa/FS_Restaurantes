@@ -172,3 +172,25 @@ FROM reservas
 JOIN clientes ON reservas.cliente_id = clientes.id
 WHERE reservas.id = 1;
 
+-- Favoritos cliente
+SELECT 
+    favoritos.cliente_id AS 'Cliente',
+    restaurantes.nombre AS 'Restaurante',
+    restaurantes.abierto AS 'Abierto'
+FROM favoritos
+JOIN restaurantes ON favoritos.restaurante_id = restaurantes.id
+WHERE favoritos.cliente_id = 1;
+-- Eliminar cerrados
+DELETE favoritos 
+FROM favoritos
+JOIN restaurantes ON favoritos.restaurante_id = restaurantes.id
+WHERE favoritos.cliente_id = 1 
+  AND restaurantes.abierto = 0;
+-- Comprobacion eliminar
+SELECT 
+    favoritos.cliente_id AS 'Cliente',
+    restaurantes.nombre AS 'Restaurante',
+    restaurantes.abierto AS 'Abierto'
+FROM favoritos
+JOIN restaurantes ON favoritos.restaurante_id = restaurantes.id
+WHERE favoritos.cliente_id = 1;
