@@ -217,7 +217,6 @@ FROM restaurantes
 JOIN mesas ON restaurantes.id = mesas.restaurante_id
 GROUP BY restaurantes.id, restaurantes.nombre;
 
-
 SELECT 
     mesas.id AS 'ID MESA',
     mesas.numero_mesa AS 'NUMERO MESA',
@@ -228,3 +227,17 @@ LEFT JOIN reservas ON mesas.id = reservas.mesa_id
 WHERE mesas.restaurante_id = 5
 	AND mesas.numero_comensales >= 2
 	AND reservas.id IS NULL;
+
+SELECT 
+    restaurantes.nombre AS 'RESTAURANTE',
+    clientes.nombre AS 'CLIENTE',
+    COUNT(reservas.id) AS 'TOTAL RESERVAS'
+FROM reservas
+JOIN mesas ON reservas.mesa_id = mesas.id
+JOIN restaurantes ON mesas.restaurante_id = restaurantes.id
+JOIN clientes ON reservas.cliente_id = clientes.id
+WHERE mesas.restaurante_id = 1
+  AND reservas.fecha_hora BETWEEN '2026-11-01 00:00:00' AND '2026-11-30 23:59:59'
+GROUP BY restaurantes.id, clientes.id, clientes.nombre
+ORDER BY 'TOTAL RESERVAS' DESC
+LIMIT 1;
