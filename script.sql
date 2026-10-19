@@ -217,6 +217,7 @@ FROM restaurantes
 JOIN mesas ON restaurantes.id = mesas.restaurante_id
 GROUP BY restaurantes.id, restaurantes.nombre;
 
+
 SELECT 
     mesas.id AS 'ID MESA',
     mesas.numero_mesa AS 'NUMERO MESA',
