@@ -110,9 +110,13 @@ INSERT INTO favoritos (cliente_id, restaurante_id) VALUES
 
 INSERT INTO reservas (mesa_id, cliente_id, fecha_hora) VALUES
 (1, 1, '2026-11-20 14:00:00'),
-(2, 2, '2026-11-20 14:30:00'),
+(2, 2, '2026-11-21 14:30:00'),
 (3, 3, '2026-11-20 21:00:00'),
 (1, 4, '2026-11-21 15:00:00'),
+(2, 4, '2026-11-20 13:00:00'),
+(2, 5, '2026-11-20 14:30:00'),
+(2, 6, '2026-11-20 15:00:00'),
+(2, 10, '2026-11-20 21:00:00'),
 (4, 5, '2026-11-20 13:30:00'),
 (5, 6, '2026-11-21 21:30:00'),
 (4, 1, '2026-11-22 14:00:00'),
@@ -194,3 +198,16 @@ SELECT
 FROM favoritos
 JOIN restaurantes ON favoritos.restaurante_id = restaurantes.id
 WHERE favoritos.cliente_id = 1;
+
+SELECT 
+    restaurantes.nombre AS 'Restaurante',
+    COUNT(reservas.id) AS 'Reservas totales'
+FROM reservas
+JOIN mesas ON reservas.mesa_id = mesas.id
+JOIN restaurantes ON mesas.restaurante_id = restaurantes.id
+WHERE mesas.numero_comensales >= 4 
+  AND DATE(reservas.fecha_hora) = '2026-11-20'
+GROUP BY restaurantes.id, restaurantes.nombre
+HAVING COUNT(reservas.id) >= 3;
+
+
