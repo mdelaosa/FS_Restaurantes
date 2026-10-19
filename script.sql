@@ -110,13 +110,13 @@ INSERT INTO favoritos (cliente_id, restaurante_id) VALUES
 
 INSERT INTO reservas (mesa_id, cliente_id, fecha_hora) VALUES
 (1, 1, '2026-11-20 14:00:00'),
-(2, 2, '2026-11-21 14:30:00'),
-(3, 3, '2026-11-20 21:00:00'),
 (1, 4, '2026-11-21 15:00:00'),
 (2, 4, '2026-11-20 13:00:00'),
 (2, 5, '2026-11-20 14:30:00'),
 (2, 6, '2026-11-20 15:00:00'),
+(2, 2, '2026-11-21 14:30:00'),
 (2, 10, '2026-11-20 21:00:00'),
+(3, 3, '2026-11-20 21:00:00'),
 (4, 5, '2026-11-20 13:30:00'),
 (5, 6, '2026-11-21 21:30:00'),
 (4, 1, '2026-11-22 14:00:00'),
@@ -153,7 +153,7 @@ FROM reservas
 JOIN clientes ON reservas.cliente_id = clientes.id
 JOIN mesas ON reservas.mesa_id = mesas.id
 WHERE mesas.restaurante_id = 1 
-  AND DATE(reservas.fecha_hora) = '2026-11-20';
+	AND DATE(reservas.fecha_hora) = '2026-11-20';
   
 SELECT 
     restaurantes.nombre AS restaurante_favorito,
@@ -162,7 +162,7 @@ SELECT
 FROM favoritos
 JOIN restaurantes ON favoritos.restaurante_id = restaurantes.id
 WHERE favoritos.cliente_id = 1 
-  AND restaurantes.abierto = 1;
+	AND restaurantes.abierto = 1;
   
 UPDATE reservas
 SET fecha_hora = '2026-11-25 21:30:00'
@@ -189,7 +189,7 @@ DELETE favoritos
 FROM favoritos
 JOIN restaurantes ON favoritos.restaurante_id = restaurantes.id
 WHERE favoritos.cliente_id = 1 
-  AND restaurantes.abierto = 0;
+	AND restaurantes.abierto = 0;
 -- Comprobacion eliminar
 SELECT 
     favoritos.cliente_id AS 'CLIENTE',
@@ -206,7 +206,7 @@ FROM reservas
 JOIN mesas ON reservas.mesa_id = mesas.id
 JOIN restaurantes ON mesas.restaurante_id = restaurantes.id
 WHERE mesas.numero_comensales >= 4 
-  AND DATE(reservas.fecha_hora) = '2026-11-20'
+	AND DATE(reservas.fecha_hora) = '2026-11-20'
 GROUP BY restaurantes.id, restaurantes.nombre
 HAVING COUNT(reservas.id) >= 3;
 
@@ -216,3 +216,14 @@ SELECT
 FROM restaurantes
 JOIN mesas ON restaurantes.id = mesas.restaurante_id
 GROUP BY restaurantes.id, restaurantes.nombre;
+
+SELECT 
+    mesas.id AS 'ID MESA',
+    mesas.numero_mesa AS 'NUMERO MESA',
+    mesas.numero_comensales AS 'NUMERO COMENSALES'
+FROM mesas
+LEFT JOIN reservas ON mesas.id = reservas.mesa_id 
+	AND reservas.fecha_hora = '2026-11-20 14:00:00'
+WHERE mesas.restaurante_id = 5
+	AND mesas.numero_comensales >= 2
+	AND reservas.id IS NULL;
