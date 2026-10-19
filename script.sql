@@ -169,18 +169,18 @@ SET fecha_hora = '2026-11-25 21:30:00'
 WHERE reservas.id = 1;
 -- Comprobacion
 SELECT 
-    reservas.id AS 'ID Reserva',
-    clientes.nombre AS 'Cliente',
-    reservas.fecha_hora AS 'Nueva Fecha y Hora'
+    reservas.id AS 'ID RESERVA',
+    clientes.nombre AS 'CLIENTE',
+    reservas.fecha_hora AS 'NUEVA FECHA Y HORA'
 FROM reservas
 JOIN clientes ON reservas.cliente_id = clientes.id
 WHERE reservas.id = 1;
 
 -- Favoritos cliente
 SELECT 
-    favoritos.cliente_id AS 'Cliente',
-    restaurantes.nombre AS 'Restaurante',
-    restaurantes.abierto AS 'Abierto'
+    favoritos.cliente_id AS 'CLIENTE',
+    restaurantes.nombre AS 'RESTAURANTE',
+    restaurantes.abierto AS 'ABIERTO'
 FROM favoritos
 JOIN restaurantes ON favoritos.restaurante_id = restaurantes.id
 WHERE favoritos.cliente_id = 1;
@@ -192,16 +192,16 @@ WHERE favoritos.cliente_id = 1
   AND restaurantes.abierto = 0;
 -- Comprobacion eliminar
 SELECT 
-    favoritos.cliente_id AS 'Cliente',
-    restaurantes.nombre AS 'Restaurante',
-    restaurantes.abierto AS 'Abierto'
+    favoritos.cliente_id AS 'CLIENTE',
+    restaurantes.nombre AS 'RESTAURANTE',
+    restaurantes.abierto AS 'ABIERTO'
 FROM favoritos
 JOIN restaurantes ON favoritos.restaurante_id = restaurantes.id
 WHERE favoritos.cliente_id = 1;
 
 SELECT 
-    restaurantes.nombre AS 'Restaurante',
-    COUNT(reservas.id) AS 'Reservas totales'
+    restaurantes.nombre AS 'RESTAURANTE',
+    COUNT(reservas.id) AS 'RESERVAS TOTALES'
 FROM reservas
 JOIN mesas ON reservas.mesa_id = mesas.id
 JOIN restaurantes ON mesas.restaurante_id = restaurantes.id
@@ -210,4 +210,9 @@ WHERE mesas.numero_comensales >= 4
 GROUP BY restaurantes.id, restaurantes.nombre
 HAVING COUNT(reservas.id) >= 3;
 
-
+SELECT 
+    restaurantes.nombre AS 'RESTAURANTE',
+    SUM(mesas.numero_comensales) AS 'AFORO TOTAL'
+FROM restaurantes
+JOIN mesas ON restaurantes.id = mesas.restaurante_id
+GROUP BY restaurantes.id, restaurantes.nombre;
